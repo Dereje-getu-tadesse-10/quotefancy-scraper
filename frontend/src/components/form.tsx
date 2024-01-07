@@ -93,7 +93,7 @@ export const ScraperForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4 max-w-[500px] mx-auto"
+        className="space-y-6 max-w-[500px] mx-auto"
       >
         <FormField
           control={form.control}
