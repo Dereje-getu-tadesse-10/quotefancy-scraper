@@ -1,12 +1,13 @@
-import express, { Express, Request, Response } from "express";
 import fs from "node:fs";
-
+import express, { Express, Request, Response } from "express";
+import cors from "cors";
 import { fetchHtml } from "./fetch-html";
 import { getQuotes } from "./scrapper";
 import { writeQuote } from "./writeQuote";
 
 const app: Express = express();
 app.use(express.json());
+app.use(cors());
 
 const port = 8080;
 
