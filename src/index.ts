@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import fs from "node:fs";
+
 import { fetchHtml } from "./fetch-html";
 import { getQuotes } from "./scrapper";
 import { writeQuote } from "./writeQuote";
@@ -43,7 +44,7 @@ app.get("/download/:fileName", (req, res) => {
   if (fs.existsSync(file)) {
     res.download(file);
   } else {
-    res.status(404).send("Fichier non trouvé");
+    res.status(404).send("Not found");
   }
 });
 

@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { v4 as uuidv4 } from "uuid";
+
 import { Quote, FileType } from "../types";
 
 const PUBLIC_DIRECTORY = path.join(__dirname, "..", "public", "quotes");
@@ -35,7 +37,9 @@ export function writeQuote(
       throw new Error("Not supported");
   }
 
-  const filePath = path.join(PUBLIC_DIRECTORY, `${file_name}.${format}`);
+  const uniqueFileName = `${file_name}-${uuidv4()}.${format}`;
+
+  const filePath = path.join(PUBLIC_DIRECTORY, uniqueFileName);
 
   fs.writeFile(filePath, data, "utf8", (err) => {
     if (err) {
