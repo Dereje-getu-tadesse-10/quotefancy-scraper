@@ -1,4 +1,12 @@
 import * as z from "zod";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "react-query";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -21,6 +29,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { json } from "stream/consumers";
 
 const formSchema = z.object({
   file_name: z.string().max(30).optional(),
@@ -51,8 +60,27 @@ export const ScraperForm = () => {
     resolver: zodResolver(formSchema),
   });
 
+  const postScraperInfo = async (body: z.infer<typeof formSchema>) => {
+    const res = await fetch("http://localhost:8080", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    return res;
+  };
+
+  const mutation = useMutation(postScraperInfo);
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    mutation.mutate({
+      file_type: values.file_type,
+      file_name: values.file_name,
+      path: values.path,
+    });
   }
 
   return (
