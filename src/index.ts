@@ -1,5 +1,5 @@
 import express, { Express, Request, Response } from "express";
-
+import fs from "node:fs";
 import { fetchHtml } from "./fetch-html";
 import { getQuotes } from "./scrapper";
 import { writeQuote } from "./writeQuote";
@@ -34,6 +34,17 @@ app.post("/", (req: Request, res: Response) => {
         message: "An error occurred",
       });
     });
+});
+
+app.get("/download/:fileName", (req, res) => {
+  const { fileName } = req.params;
+  const file = `public/quotes/${fileName}`;
+  console.log(file);
+  if (fs.existsSync(file)) {
+    res.download(file);
+  } else {
+    res.status(404).send("Fichier non trouvé");
+  }
 });
 
 app.listen(port, () => {
