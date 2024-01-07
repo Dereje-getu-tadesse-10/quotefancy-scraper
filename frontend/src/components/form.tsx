@@ -3,7 +3,7 @@ import { useMutation } from "react-query";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import {
@@ -23,6 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useState } from "react";
 
 const formSchema = z.object({
   file_name: z.string().max(30).optional(),
@@ -49,6 +50,7 @@ const formSchema = z.object({
 });
 
 export const ScraperForm = () => {
+  const [downloadLink, setDownloadLink] = useState("");
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -68,7 +70,15 @@ export const ScraperForm = () => {
     return res;
   };
 
-  const mutation = useMutation(postScraperInfo);
+  const mutation = useMutation(postScraperInfo, {
+    onSuccess: async (data) => {
+      const res = await data.json();
+      const downloadLink = `${import.meta.env.VITE_BACKEND_API}/download/${
+        res.file
+      }`;
+      setDownloadLink(downloadLink);
+    },
+  });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
@@ -81,7 +91,10 @@ export const ScraperForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-4 max-w-[500px] mx-auto"
+      >
         <FormField
           control={form.control}
           name="path"
@@ -135,7 +148,18 @@ export const ScraperForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Button type="submit">Submit</Button>
+          {downloadLink && (
+            <a
+              href={downloadLink}
+              className={buttonVariants({ variant: "secondary" })}
+              download
+            >
+              Download File
+            </a>
+          )}
+        </div>
       </form>
     </Form>
   );

@@ -1,5 +1,5 @@
 export const Hero = () => (
-  <section className="my-20">
+  <section className="mt-20 mb-10">
     <h1 className="text-center text-3xl font-bold leading-tight tracking-tighter md:text-6xl">
       Quotefancy Scrapper
     </h1>
