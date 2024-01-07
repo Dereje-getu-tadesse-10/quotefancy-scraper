@@ -49,4 +49,5 @@ export function writeQuote(
       console.log(`Quote saved in ${filePath}`);
     }
   });
+  return uniqueFileName;
 }

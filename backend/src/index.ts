@@ -28,10 +28,11 @@ app.post("/", (req: Request, res: Response) => {
   fetchHtml(path)
     .then(getQuotes)
     .then((quotes) => {
-      writeQuote(quotes, file_type, file_name);
+      const file = writeQuote(quotes, file_type, file_name);
       res.json({
         status: true,
         message: "Quotes fetched and written successfully",
+        file
       });
     })
     .catch((error) => {
