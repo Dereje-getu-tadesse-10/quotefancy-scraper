@@ -12,7 +12,7 @@ export function writeQuote(
       data = JSON.stringify(quotes, null, 2);
       break;
     case "txt":
-      data = quotes.map((quote: Quote) => `Text: ${quote.text}`).join("\n");
+      data = quotes.map((quote: Quote) => `${quote.text}`).join("\n");
       break;
     case "csv":
       data =
