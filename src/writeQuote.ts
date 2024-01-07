@@ -36,7 +36,7 @@ export function writeQuote(
   }
 
   const filePath = path.join(PUBLIC_DIRECTORY, `${file_name}.${format}`);
-  
+
   fs.writeFile(filePath, data, "utf8", (err) => {
     if (err) {
       console.error(err);
@@ -44,11 +44,4 @@ export function writeQuote(
       console.log(`Quote saved in ${filePath}`);
     }
   });
-  // fs.writeFile(`${file_name}.${format}`, data, "utf8", (err) => {
-  //   if (err) {
-  //     console.error(err);
-  //   } else {
-  //     console.log(`Quote saved in ${file_name}.${format}`);
-  //   }
-  // });
 }
