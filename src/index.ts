@@ -1,6 +1,6 @@
 import { fetchHtml } from "./fetch-html";
 import { getQuotes } from "./scrapper";
-import { writeQuote } from "../writeQuote";
+import { writeQuote } from "./writeQuote";
 
 const SCOPED_ARTIST = "/taylor-swift-quotes";
 const OUTPUT_FILE = "json";

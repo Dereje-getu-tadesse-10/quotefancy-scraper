@@ -1,5 +1,5 @@
 import fs from "node:fs";
-import { Quote, FileType } from "./types";
+import { Quote, FileType } from "../types";
 
 export function writeQuote(
   quotes: Quote[],
