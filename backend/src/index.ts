@@ -2,7 +2,7 @@ import fs from "node:fs";
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import { fetchHtml } from "./fetch-html";
-import { getQuotes } from "./scrapper";
+import { getQuotes } from "./scraper";
 import { writeQuote } from "./writeQuote";
 
 const app: Express = express();
@@ -32,7 +32,7 @@ app.post("/", (req: Request, res: Response) => {
       res.json({
         status: true,
         message: "Quotes fetched and written successfully",
-        file
+        file,
       });
     })
     .catch((error) => {
