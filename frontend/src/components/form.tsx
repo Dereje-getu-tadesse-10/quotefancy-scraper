@@ -57,7 +57,7 @@ export const ScraperForm = () => {
   });
 
   const postScraperInfo = async (body: z.infer<typeof formSchema>) => {
-    const res = await fetch("http://localhost:8080", {
+    const res = await fetch(import.meta.env.VITE_BACKEND_API, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
