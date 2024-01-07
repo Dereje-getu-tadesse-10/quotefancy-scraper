@@ -1,10 +1,5 @@
 import cheerio from "cheerio";
-
-type Quote = {
-  text: string;
-  url: string;
-  image: string;
-};
+import { Quote } from "./types";
 
 export const getQuotes = (html: string): Quote[] => {
   const $ = cheerio.load(html);
