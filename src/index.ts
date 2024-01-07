@@ -1,14 +1,7 @@
-import { fetchHtml } from "./fetch-html";
-import { getQuotes } from "./scrapper";
-import { writeQuote } from "./writeQuote";
+import express, { Express } from "express";
+const app: Express = express();
+const port = 8080;
 
-const SCOPED_ARTIST = "/taylor-swift-quotes";
-const OUTPUT_FILE = "json";
-const FILE_NAME = "taylor-switft-quotes";
-
-fetchHtml(SCOPED_ARTIST)
-  .then(getQuotes)
-  .then((quotes) => {
-    writeQuote(quotes, OUTPUT_FILE, FILE_NAME);
-  })
-  .catch((error) => console.log(error));
+app.listen(port, () => {
+  console.log(`[server]: Server is running at http://localhost:${port}`);
+});
