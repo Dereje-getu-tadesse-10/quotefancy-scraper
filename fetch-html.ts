@@ -1,6 +1,6 @@
 import https from "node:https";
 
-export const fecthHtml = async (path: string): Promise<string> =>
+export const fetchHtml = async (path: string): Promise<string> =>
   new Promise((resolve, reject) => {
     https
       .get(
