@@ -149,7 +149,7 @@ export const ScraperForm = () => {
           )}
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Scrape</Button>
           {downloadLink && (
             <a
               href={downloadLink}
