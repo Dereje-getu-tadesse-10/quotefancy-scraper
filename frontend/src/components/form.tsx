@@ -1,11 +1,5 @@
 import * as z from "zod";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "react-query";
+import { useMutation } from "react-query";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -29,7 +23,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { json } from "stream/consumers";
 
 const formSchema = z.object({
   file_name: z.string().max(30).optional(),
@@ -58,6 +51,9 @@ const formSchema = z.object({
 export const ScraperForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      file_type: "json",
+    },
   });
 
   const postScraperInfo = async (body: z.infer<typeof formSchema>) => {
@@ -85,7 +81,7 @@ export const ScraperForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="path"
@@ -130,9 +126,9 @@ export const ScraperForm = () => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="json">Json (.json file)</SelectItem>
-                  <SelectItem value="txt">Text (.txt file)</SelectItem>
-                  <SelectItem value="csv">Csv (.csv file)</SelectItem>
+                  <SelectItem value="json">JSON</SelectItem>
+                  <SelectItem value="txt">TEXT</SelectItem>
+                  <SelectItem value="csv">CSV</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
