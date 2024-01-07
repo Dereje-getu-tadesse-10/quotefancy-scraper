@@ -5,7 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 
 import { Quote, FileType } from "../types";
 
-const PUBLIC_DIRECTORY = path.join(__dirname, "..", "public", "quotes");
+const PUBLIC_DIRECTORY =
+  "./public/quotes" || path.join(__dirname, "..", "..", "public", "quotes");
 
 export function writeQuote(
   quotes: Quote[],
