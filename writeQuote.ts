@@ -1,7 +1,11 @@
 import fs from "node:fs";
 import { Quote, FileType } from "./types";
 
-export function writeQuote(quotes: Quote[], format: FileType) {
+export function writeQuote(
+  quotes: Quote[],
+  format: FileType,
+  file_name = "quotes"
+) {
   let data;
   switch (format) {
     case "json":
@@ -23,11 +27,11 @@ export function writeQuote(quotes: Quote[], format: FileType) {
       throw new Error("Not supported");
   }
 
-  fs.writeFile(`quotes.${format}`, data, "utf8", (err) => {
+  fs.writeFile(`${file_name}.${format}`, data, "utf8", (err) => {
     if (err) {
       console.error(err);
     } else {
-      console.log(`Quote saved in quotes.${format}`);
+      console.log(`Quote saved in ${file_name}.${format}`);
     }
   });
 }
