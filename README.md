@@ -73,7 +73,7 @@ To scrape a single page, simply provide a URL like: `https://quotefancy.com/tayl
 
 ### Generated File Examples
 
-#### JSON format xxample:
+#### JSON format example:
 
 ```json
 [
