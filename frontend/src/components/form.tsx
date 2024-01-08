@@ -127,7 +127,7 @@ export const ScraperForm = () => {
                 <FormItem>
                   <FormLabel>File name</FormLabel>
                   <FormControl>
-                    <Input placeholder="quotes" {...field} />
+                    <Input placeholder="taylor-swift" {...field} />
                   </FormControl>
                   <FormDescription>
                     This is the output file name by default, is{" "}

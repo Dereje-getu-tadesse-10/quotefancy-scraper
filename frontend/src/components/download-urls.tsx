@@ -1,12 +1,5 @@
-import { FileDown, Trash2 } from "lucide-react";
-import {
-  useMutation,
-  MutateFunction,
-  MutateOptions,
-  MutationMeta,
-  UseMutationOptions,
-  UseMutationResult,
-} from "react-query";
+import { FileDown, Trash2, File } from "lucide-react";
+import { useMutation, UseMutationResult } from "react-query";
 
 import { truncateString } from "@/lib/truncate";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -92,18 +85,21 @@ const ItemWrapper = ({
 );
 
 const Item = ({ file, onClick }: { file: string; onClick: () => void }) => (
-  <li className="flex items-center justify-between gap-4 md:flex-row">
-    <p className="text-slate-700">{truncateString(file, 25)}</p>
-    <div className="flex gap-2">
+  <li className="flex items-center justify-between gap-4 flex-wrap rounded-lg border p-3 md:flex-row">
+    <p className="flex items-center gap-1 text-card-foreground">
+      <File />
+      {truncateString(file, 20)}
+    </p>
+    <div className="flex  gap-2">
       <a
-        className={buttonVariants({ variant: "outline" })}
+        className={buttonVariants({ variant: "outline", size: "sm" })}
         href={`${import.meta.env.VITE_BACKEND_API}/download/${file}`}
         download
       >
-        <FileDown className="text-slate-700" size={20} />
+        <FileDown className="text-card-foreground" size={16} />
       </a>
-      <Button variant={"destructive"} onClick={onClick}>
-        <Trash2 size={20} />
+      <Button variant={"destructive"} size={"sm"} onClick={onClick}>
+        <Trash2 size={16} />
       </Button>
     </div>
   </li>
