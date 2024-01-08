@@ -111,6 +111,7 @@ export const ScraperForm = () => {
                     <Input
                       placeholder="https://quotefancy.com/taylor-swift-quotes, https://quotefancy.com/taylor-swift-quotes/page/2"
                       {...field}
+                      type="url"
                     />
                   </FormControl>
                   <FormDescription>
