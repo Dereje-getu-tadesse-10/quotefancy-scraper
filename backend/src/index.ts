@@ -15,7 +15,7 @@ app.use(
 
 const port = 8080;
 
-app.post("/", (req: Request, res: Response) => {
+app.post("/", async (req: Request, res: Response) => {
   const { path, file_name, file_type } = req.body;
 
   if (!path || !file_name || !file_type) {
@@ -25,22 +25,31 @@ app.post("/", (req: Request, res: Response) => {
     });
   }
 
-  fetchHtml(path)
-    .then(getQuotes)
-    .then((quotes) => {
-      const file = writeQuote(quotes, file_type, file_name);
-      res.json({
-        status: true,
-        message: "Quotes fetched and written successfully",
-        file,
-      });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        status: false,
-        message: "An error occurred",
-      });
+  try {
+    const paths = Array.isArray(path) ? path : [path];
+    const allQuotes = await Promise.all(
+      paths.map(async (singlePath) => {
+        const html = await fetchHtml(singlePath);
+        const quotes = getQuotes(html);
+        return quotes;
+      })
+    );
+
+    const combinedQuotes = allQuotes.flat();
+    const file = writeQuote(combinedQuotes, file_type, file_name);
+
+    res.json({
+      status: true,
+      message: "Quotes fetched and written successfully",
+      file,
     });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: false,
+      message: "An error occurred",
+    });
+  }
 });
 
 app.get("/download/:fileName", (req, res) => {
