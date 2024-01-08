@@ -7,7 +7,7 @@ type DownloadStore = {
   removeDownloadUrl: (url: string) => void;
 };
 
-export const useDownloadStore = create(
+export const useDownloadStore = create<DownloadStore>()(
   persist(
     (set) => ({
       downloadUrls: [],
