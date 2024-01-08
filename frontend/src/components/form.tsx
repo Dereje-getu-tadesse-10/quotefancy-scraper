@@ -30,22 +30,21 @@ const formSchema = z.object({
   file_type: z.enum(["json", "txt", "csv"]),
   path: z
     .string()
-    .refine(
-      (input) => {
-        try {
-          new URL(input);
-          return true;
-        } catch {
-          return false;
-        }
-      },
-      {
-        message: "Invalid URL",
-      }
+    .transform((input) =>
+      input
+        .split(/,\s*/)
+        .map((urlString) => {
+          try {
+            const url = new URL(urlString.trim());
+            return url.pathname;
+          } catch {
+            return "";
+          }
+        })
+        .filter((path) => path !== "")
     )
-    .transform((input) => {
-      const url = new URL(input);
-      return url.pathname;
+    .refine((paths) => paths.length > 0, {
+      message: "Please provide at least one valid URL",
     }),
 });
 
@@ -81,7 +80,6 @@ export const ScraperForm = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
     mutation.mutate({
       file_type: values.file_type,
       file_name: values.file_name,
@@ -103,7 +101,7 @@ export const ScraperForm = () => {
               <FormLabel>File name</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="https://quotefancy.com/taylor-swift-quotes"
+                  placeholder="https://quotefancy.com/taylor-swift-quotes, https://quotefancy.com/taylor-swift-quotes/page/2"
                   {...field}
                 />
               </FormControl>
