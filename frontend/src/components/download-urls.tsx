@@ -1,5 +1,6 @@
 import { FileDown, Trash2, File } from "lucide-react";
 import { useMutation, UseMutationResult } from "react-query";
+import { z } from "zod";
 
 import { truncateString } from "@/lib/truncate";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -7,13 +8,17 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 import { useDownloadStore } from "@/stores/useQuoteList";
-import { z } from "zod";
 
 const formSchema = z.object({
   file: z.string().min(1),
@@ -87,20 +92,34 @@ const ItemWrapper = ({
 const Item = ({ file, onClick }: { file: string; onClick: () => void }) => (
   <li className="flex items-center justify-between gap-4 flex-wrap rounded-lg border p-3 md:flex-row">
     <p className="flex items-center gap-1 text-card-foreground">
-      <File />
+      <File className="text-card-foreground" size={20} />
       {truncateString(file, 20)}
     </p>
     <div className="flex  gap-2">
-      <a
-        className={buttonVariants({ variant: "outline", size: "sm" })}
-        href={`${import.meta.env.VITE_BACKEND_API}/download/${file}`}
-        download
-      >
-        <FileDown className="text-card-foreground" size={16} />
-      </a>
-      <Button variant={"destructive"} size={"sm"} onClick={onClick}>
-        <Trash2 size={16} />
-      </Button>
+      <Tooltip>
+        <TooltipTrigger>
+          <a
+            className={buttonVariants({ variant: "outline", size: "sm" })}
+            href={`${import.meta.env.VITE_BACKEND_API}/download/${file}`}
+            download
+          >
+            <FileDown className="text-card-foreground" size={16} />
+          </a>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Download file</p>
+        </TooltipContent>
+      </Tooltip>
+      <Tooltip>
+        <TooltipTrigger>
+          <Button variant={"destructive"} size={"sm"} onClick={onClick}>
+            <Trash2 size={16} />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Delete file</p>
+        </TooltipContent>
+      </Tooltip>
     </div>
   </li>
 );

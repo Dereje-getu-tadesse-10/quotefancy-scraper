@@ -114,7 +114,8 @@ export const ScraperForm = () => {
                     />
                   </FormControl>
                   <FormDescription>
-                    You can pass a list of url separed by comma.{" "}
+                    You can pass a list of url separed by <strong>comma</strong>
+                    .{" "}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -154,13 +155,15 @@ export const ScraperForm = () => {
                     </FormControl>
                     <SelectContent>
                       <SelectItem value="json">JSON</SelectItem>
-                      <SelectItem value="txt">TEXT</SelectItem>
+                      <SelectItem value="txt">
+                        TEXT (image quote not available)
+                      </SelectItem>
                       <SelectItem value="csv">CSV</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
                   <FormDescription>
-                    This is the output extension of the file by default:{" "}
+                    This is the output extension of the file by default, is{" "}
                     <strong>json</strong>.
                   </FormDescription>
                 </FormItem>
