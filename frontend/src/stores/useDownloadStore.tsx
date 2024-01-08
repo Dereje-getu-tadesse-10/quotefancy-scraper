@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type DownloadStore = {
+export type DownloadStore = {
   downloadUrls: string[];
   addDownloadUrl: (url: string) => void;
   removeDownloadUrl: (url: string) => void;

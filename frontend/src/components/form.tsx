@@ -1,20 +1,20 @@
-import * as z from "zod";
-import { useMutation } from "react-query";
-
+import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+
+import { formSchema, FormSchema } from "@/schemas/form-schema";
+import { usePostScraperInfo } from "@/hooks/usePostScraperInfo";
 import { useDownloadStore } from "@/stores/useDownloadStore";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 import {
   Form,
   FormControl,
   FormDescription,
-  FormField,
   FormItem,
   FormLabel,
   FormMessage,
+  FormField,
 } from "@/components/ui/form";
 
 import {
@@ -27,69 +27,26 @@ import {
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const formSchema = z.object({
-  file_name: z.string().max(30).optional(),
-  file_type: z.enum(["json", "txt", "csv"]),
-  path: z
-    .string()
-    .transform((input) =>
-      input
-        .split(/,\s*/)
-        .map((urlString) => {
-          try {
-            const url = new URL(urlString.trim());
-            return url.pathname;
-          } catch {
-            return "";
-          }
-        })
-        .filter((path) => path !== "")
-    )
-    .refine((paths) => paths.length > 0, {
-      message: "Please provide at least one valid URL",
-    }),
-});
-
 export const ScraperForm = () => {
   const { addDownloadUrl } = useDownloadStore();
-  const form = useForm<z.infer<typeof formSchema>>({
+
+  const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       file_type: "json",
     },
   });
 
-  const postScraperInfo = async (body: z.infer<typeof formSchema>) => {
-    const res = await fetch(import.meta.env.VITE_BACKEND_API, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
+  const mutation = usePostScraperInfo(addDownloadUrl);
 
-    return res;
+  const onSubmit: SubmitHandler<FormSchema> = (values) => {
+    mutation.mutate(values);
   };
-
-  const mutation = useMutation(postScraperInfo, {
-    onSuccess: async (data) => {
-      const res = await data.json();
-      addDownloadUrl(res.file);
-    },
-  });
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    mutation.mutate({
-      file_type: values.file_type,
-      file_name: values.file_name,
-      path: values.path,
-    });
-  }
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Scraper form</CardTitle>
+        <CardTitle>Scraper Form</CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>
