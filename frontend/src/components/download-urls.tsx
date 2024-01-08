@@ -18,7 +18,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import { useDownloadStore } from "@/stores/useQuoteList";
+import { useDownloadStore } from "@/stores/useDownloadStore";
 
 const formSchema = z.object({
   file: z.string().min(1),

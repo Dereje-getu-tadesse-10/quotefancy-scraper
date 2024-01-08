@@ -1,16 +1,22 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+type DownloadStore = {
+  downloadUrls: string[];
+  addDownloadUrl: (url: string) => void;
+  removeDownloadUrl: (url: string) => void;
+};
+
 export const useDownloadStore = create(
   persist(
     (set) => ({
       downloadUrls: [],
-      addDownloadUrl: (url) =>
-        set((state: any) => ({
+      addDownloadUrl: (url: string) =>
+        set((state: DownloadStore) => ({
           downloadUrls: [...state.downloadUrls, url],
         })),
-      removeDownloadUrl: (url) =>
-        set((state) => ({
+      removeDownloadUrl: (url: string) =>
+        set((state: DownloadStore) => ({
           downloadUrls: state.downloadUrls.filter((item) => item !== url),
         })),
     }),

@@ -1,6 +1,5 @@
 import { Hero } from "@/components/hero";
 import { ScrapeWrapper } from "@/components/scrape-wrapper";
-import { ThemeSwitch } from "./components/theme-switch";
 
 function App() {
   return (
