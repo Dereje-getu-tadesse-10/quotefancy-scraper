@@ -70,4 +70,3 @@ https://quotefancy.com/elon-musk-quotes
 To scrape a single page, simply provide a URL like: `https://quotefancy.com/taylor-swift-quotes`
 
 > This project is a playground for learning web scraping.
-# reimagined-carnival
