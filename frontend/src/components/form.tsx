@@ -110,7 +110,7 @@ https://quotefancy.com/taylor-swift-quotes/page/3
                         type="url"
                       />
                     </FormControl>
-                    <FormDescription>quotefancy url </FormDescription>
+                    <FormDescription>Quotefancy url </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}

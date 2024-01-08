@@ -8,7 +8,7 @@ export const ThemeSwitch = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="absolute top-10 right-10">
+    <div>
       <Button
         variant={"ghost"}
         size={"icon"}
@@ -16,7 +16,7 @@ export const ThemeSwitch = () => {
           setTheme(theme === "light" ? "dark" : "light");
         }}
       >
-        {theme === "light" ? <Sun size={17} /> : <Moon size={17} />}
+        {theme === "light" ? <Sun size={16} /> : <Moon size={16} />}
       </Button>
     </div>
   );
