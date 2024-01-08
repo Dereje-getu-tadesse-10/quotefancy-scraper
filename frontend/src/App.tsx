@@ -1,11 +1,11 @@
-import { ScraperForm } from "./components/form";
 import { Hero } from "./components/hero";
+import { ScrapeWrapper } from "./components/scrape-wrapper";
 
 function App() {
   return (
-    <main className="max-w-[800px] mx-auto">
+    <main className="container mx-auto">
       <Hero />
-      <ScraperForm />
+      <ScrapeWrapper />
     </main>
   );
 }

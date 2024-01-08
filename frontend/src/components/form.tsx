@@ -25,6 +25,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
 const formSchema = z.object({
   file_name: z.string().max(30).optional(),
   file_type: z.enum(["json", "txt", "csv"]),
@@ -88,65 +97,79 @@ export const ScraperForm = () => {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <FormField
-          control={form.control}
-          name="path"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>File name</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="https://quotefancy.com/taylor-swift-quotes, https://quotefancy.com/taylor-swift-quotes/page/2"
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription>This is the output file name</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="file_name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>File name</FormLabel>
-              <FormControl>
-                <Input placeholder="quotes" {...field} />
-              </FormControl>
-              <FormDescription>This is the output file name</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="file_type"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>File type</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select the output of the file type" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="json">JSON</SelectItem>
-                  <SelectItem value="txt">TEXT</SelectItem>
-                  <SelectItem value="csv">CSV</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Button type="submit">Scrape</Button>
-        </div>
-      </form>
-    </Form>
+    <Card>
+      <CardHeader>
+        <CardTitle>Scraper form</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <FormField
+              control={form.control}
+              name="path"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>File name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="https://quotefancy.com/taylor-swift-quotes, https://quotefancy.com/taylor-swift-quotes/page/2"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    This is the output file name
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="file_name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>File name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="quotes" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is the output file name
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="file_type"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>File type</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select the output of the file type" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="json">JSON</SelectItem>
+                      <SelectItem value="txt">TEXT</SelectItem>
+                      <SelectItem value="csv">CSV</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Button type="submit">Scrape</Button>
+            </div>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
   );
 };
