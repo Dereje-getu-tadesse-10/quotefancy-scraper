@@ -114,7 +114,7 @@ export const ScraperForm = () => {
                     />
                   </FormControl>
                   <FormDescription>
-                    You can pass a list of url separed by comma{" "}
+                    You can pass a list of url separed by comma.{" "}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
