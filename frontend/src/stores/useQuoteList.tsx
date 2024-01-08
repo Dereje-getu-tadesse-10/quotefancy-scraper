@@ -9,6 +9,10 @@ export const useDownloadStore = create(
         set((state: any) => ({
           downloadUrls: [...state.downloadUrls, url],
         })),
+      removeDownloadUrl: (url) =>
+        set((state) => ({
+          downloadUrls: state.downloadUrls.filter((item) => item !== url),
+        })),
     }),
     {
       name: "download-urls-storage",

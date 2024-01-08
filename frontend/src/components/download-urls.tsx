@@ -1,11 +1,5 @@
 import { FileDown, Trash2 } from "lucide-react";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "react-query";
+import { useMutation } from "react-query";
 
 import { truncateString } from "@/lib/truncate";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -26,6 +20,8 @@ const formSchema = z.object({
 });
 
 export const DownloadUrls = () => {
+  const { downloadUrls, removeDownloadUrl } = useDownloadStore();
+
   const deleteQuery = async (data: z.infer<typeof formSchema>) => {
     const res = await fetch(
       `${import.meta.env.VITE_BACKEND_API}/delete/${data.file}`,
@@ -36,13 +32,13 @@ export const DownloadUrls = () => {
     return res;
   };
   const mutation = useMutation(deleteQuery, {
-    onSuccess: async (data) => {
+    onSuccess: async (data, variables) => {
       const res = await data.json();
-      console.log(res);
+      if (res.status === true) {
+        removeDownloadUrl(variables.file);
+      }
     },
   });
-
-  const { downloadUrls } = useDownloadStore();
 
   return (
     <Card className="w-full">
@@ -72,7 +68,7 @@ const Item = ({ file, onClick }: { file: string; onClick: any }) => (
     <div className="flex gap-2">
       <a
         className={buttonVariants({ variant: "outline" })}
-        href={file}
+        href={`${import.meta.env.VITE_BACKEND_API}/download/${file}`}
         download
       >
         <FileDown className="text-slate-700" size={20} />
