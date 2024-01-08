@@ -2,10 +2,10 @@
 
 ## Features
 
-- [x] Download scraped data - with image
-- [x] Delete scraped file
-- [x] Scrape multiple **urls**
-- [x] Choose file name and output file extension (e.g., `json`, `txt`, `csv`)
+- [x] Download scraped data with images (Note: Images are available only in JSON and CSV formats).
+- [x] Delete scraped files.
+- [x] Scrape multiple **urls**.
+- [x] Choose file name and output file extension (options include: `json`, `txt`, `csv`).
 
 https://github.com/Dereje-getu-tadesse-10/quotefancy-scraper/assets/95926729/8f0df1ba-c3db-489c-8a1f-9cb0c040ecee
 
@@ -46,7 +46,6 @@ cd frontend && pnpm i && pnpm run dev
 ```
 
 The server runs on http://localhost:5173
-
 
 ## Multiple URL Scraping
 
