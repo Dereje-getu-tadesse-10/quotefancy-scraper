@@ -78,7 +78,10 @@ app.delete("/delete/:fileName", (req: Request, res: Response) => {
         res.status(500).send("An error occurred");
       }
     } else {
-      res.send("File deleted");
+      res.json({
+        status: true,
+        message: "File deleted",
+      });
     }
   });
 });
