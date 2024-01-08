@@ -71,4 +71,36 @@ https://quotefancy.com/elon-musk-quotes
 
 To scrape a single page, simply provide a URL like: `https://quotefancy.com/taylor-swift-quotes`
 
+### Generated File Examples
+
+#### JSON format xxample:
+
+```json
+[
+  {
+    "text": "Just be yourself, there is no one better.",
+    "url": "https://quotefancy.com/quote/4237/Taylor-Swift-Just-be-yourself-there-is-no-one-better",
+    "image": "https://quotefancy.com/media/wallpaper/800x450/6361203-Taylor-Swift-Quote-Just-be-yourself-there-is-no-one-better.jpg"
+  },
+  {...}
+]
+```
+
+#### CSV format example:
+
+```csv
+Text,URL,Image
+"Work hard in silence, let your success be your noise.","https://quotefancy.com/quote/199926/Anonymous-Work-hard-in-silence-let-your-success-be-your-noise","https://quotefancy.com/media/wallpaper/800x450/18846-Anonymous-Quote-Work-hard-in-silence-let-your-success-be-your.jpg"
+"If you want something you have never had, you must be willing to do something you have never done.","https://quotefancy.com/quote/168888/Thomas-Jefferson-If-you-want-something-you-have-never-had-you-must-be-willing-to-do","https://quotefancy.com/media/wallpaper/800x450/18771-Thomas-Jefferson-Quote-If-you-want-something-you-have-never-had.jpg"
+"Life begins at the end of your comfort zone.","https://quotefancy.com/quote/8314/Neale-Donald-Walsch-Life-begins-at-the-end-of-your-comfort-zone","https://quotefancy.com/media/wallpaper/800x450/17003-Neale-Donald-Walsch-Quote-Life-begins-at-the-end-of-your-comfort.jpg"
+```
+
+#### Text format example:
+
+```
+Work hard in silence, let your success be your noise.
+If you want something you have never had, you must be willing to do something you have never done.
+Life begins at the end of your comfort zone.
+```
+
 > This project is a playground for learning web scraping.
