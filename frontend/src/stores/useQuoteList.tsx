@@ -5,8 +5,8 @@ export const useDownloadStore = create(
   persist(
     (set) => ({
       downloadUrls: [],
-      addDownloadUrl: () =>
-        set((state) => ({
+      addDownloadUrl: (url) =>
+        set((state: any) => ({
           downloadUrls: [...state.downloadUrls, url],
         })),
     }),
