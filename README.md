@@ -98,9 +98,9 @@ Text,URL,Image
 #### Text format example:
 
 ```
-Work hard in silence, let your success be your noise.
-If you want something you have never had, you must be willing to do something you have never done.
-Life begins at the end of your comfort zone.
+Success is the best revenge.
+Shoot for the stars, so if you fall you land on a cloud.
+Everyone’s always telling you to be humble. When was the last time someone told you to be great?
 ```
 
 > This project is a playground for learning web scraping.
