@@ -25,14 +25,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const formSchema = z.object({
   file_name: z.string().max(30).optional(),

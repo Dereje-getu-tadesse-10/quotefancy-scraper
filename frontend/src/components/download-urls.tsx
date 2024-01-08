@@ -20,14 +20,14 @@ import {
 
 import { useDownloadStore } from "@/stores/useDownloadStore";
 
-const formSchema = z.object({
+const urlSchema = z.object({
   file: z.string().min(1),
 });
 
 export const DownloadUrls = () => {
   const { downloadUrls, removeDownloadUrl } = useDownloadStore();
 
-  const deleteQuery = async (data: z.infer<typeof formSchema>) => {
+  const deleteQuery = async (data: z.infer<typeof urlSchema>) => {
     const res = await fetch(
       `${import.meta.env.VITE_BACKEND_API}/delete/${data.file}`,
       {
