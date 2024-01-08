@@ -1,1 +1,1 @@
-# quotefancy-scraper
+# Quotefancy scraper
