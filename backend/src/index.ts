@@ -1,6 +1,8 @@
 import fs from "node:fs";
+import path from "node:path";
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
+
 import { fetchHtml } from "./fetch-html";
 import { getQuotes } from "./scraper";
 import { writeQuote } from "./writeQuote";
@@ -61,6 +63,24 @@ app.get("/download/:fileName", (req, res) => {
   } else {
     res.status(404).send("Not found");
   }
+});
+
+app.delete("/delete/:fileName", (req: Request, res: Response) => {
+  const { fileName } = req.params;
+  const filePath = path.join("public/quotes", fileName);
+
+  fs.unlink(filePath, (err) => {
+    if (err) {
+      if (err.code === "ENOENT") {
+        res.status(404).send("File not found");
+      } else {
+        console.error(err);
+        res.status(500).send("An error occurred");
+      }
+    } else {
+      res.send("File deleted");
+    }
+  });
 });
 
 app.listen(port, () => {
