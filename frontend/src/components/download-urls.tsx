@@ -1,5 +1,12 @@
 import { FileDown, Trash2 } from "lucide-react";
-import { useMutation } from "react-query";
+import {
+  useMutation,
+  MutateFunction,
+  MutateOptions,
+  MutationMeta,
+  UseMutationOptions,
+  UseMutationResult,
+} from "react-query";
 
 import { truncateString } from "@/lib/truncate";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -31,6 +38,7 @@ export const DownloadUrls = () => {
     );
     return res;
   };
+
   const mutation = useMutation(deleteQuery, {
     onSuccess: async (data, variables) => {
       const res = await data.json();
@@ -47,22 +55,43 @@ export const DownloadUrls = () => {
         <CardDescription>all files</CardDescription>
       </CardHeader>
       <CardContent className="h-[384px] overflow-x-scroll">
-        <ul className="space-y-4">
-          {downloadUrls.map((file: string) => (
-            <Item
-              file={file}
-              onClick={() => {
-                mutation.mutate({ file });
-              }}
-            />
-          ))}
-        </ul>
+        {downloadUrls.length === 0 ? (
+          <EmptyCard />
+        ) : (
+          <ItemWrapper downloadUrls={downloadUrls} mutation={mutation} />
+        )}
       </CardContent>
     </Card>
   );
 };
 
-const Item = ({ file, onClick }: { file: string; onClick: any }) => (
+const ItemWrapper = ({
+  downloadUrls,
+  mutation,
+}: {
+  downloadUrls: string[];
+  mutation: UseMutationResult<
+    Response,
+    unknown,
+    {
+      file: string;
+    },
+    unknown
+  >;
+}) => (
+  <ul className="space-y-4">
+    {downloadUrls.map((file: string) => (
+      <Item
+        file={file}
+        onClick={() => {
+          mutation.mutate({ file });
+        }}
+      />
+    ))}
+  </ul>
+);
+
+const Item = ({ file, onClick }: { file: string; onClick: () => void }) => (
   <li className="flex items-center justify-between gap-4 md:flex-row">
     <p className="text-slate-700">{truncateString(file, 25)}</p>
     <div className="flex gap-2">
@@ -78,4 +107,10 @@ const Item = ({ file, onClick }: { file: string; onClick: any }) => (
       </Button>
     </div>
   </li>
+);
+
+const EmptyCard = () => (
+  <p className="text-center text-card-foreground font-medium">
+    No downloadable files available. 📂✨
+  </p>
 );
