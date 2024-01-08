@@ -51,10 +51,10 @@ export const DownloadUrls = () => {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>File</CardTitle>
-        <CardDescription>all files</CardDescription>
+        <CardTitle>My files</CardTitle>
+        <CardDescription>All your files are here</CardDescription>
       </CardHeader>
-      <CardContent className="h-[384px] overflow-x-scroll">
+      <CardContent className="h-[410px] overflow-x-scroll">
         {downloadUrls.length === 0 ? (
           <EmptyCard />
         ) : (

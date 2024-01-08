@@ -81,9 +81,6 @@ export const ScraperForm = () => {
   const mutation = useMutation(postScraperInfo, {
     onSuccess: async (data) => {
       const res = await data.json();
-      // const downloadLink = `${import.meta.env.VITE_BACKEND_API}/download/${
-      //   res.file
-      // }`;
       addDownloadUrl(res.file);
     },
   });
@@ -109,7 +106,7 @@ export const ScraperForm = () => {
               name="path"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>File name</FormLabel>
+                  <FormLabel>Quotefancy url</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="https://quotefancy.com/taylor-swift-quotes, https://quotefancy.com/taylor-swift-quotes/page/2"
@@ -117,7 +114,7 @@ export const ScraperForm = () => {
                     />
                   </FormControl>
                   <FormDescription>
-                    This is the output file name
+                    You can pass a list of url separed by comma{" "}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -133,7 +130,8 @@ export const ScraperForm = () => {
                     <Input placeholder="quotes" {...field} />
                   </FormControl>
                   <FormDescription>
-                    This is the output file name
+                    This is the output file name by default, is{" "}
+                    <strong>quotes</strong>.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -161,6 +159,10 @@ export const ScraperForm = () => {
                     </SelectContent>
                   </Select>
                   <FormMessage />
+                  <FormDescription>
+                    This is the output extension of the file by default:{" "}
+                    <strong>json</strong>.
+                  </FormDescription>
                 </FormItem>
               )}
             />
