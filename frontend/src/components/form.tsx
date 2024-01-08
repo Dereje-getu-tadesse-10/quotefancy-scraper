@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useDownloadStore } from "@/stores/useQuoteList";
 
 import {
   Form,
@@ -49,7 +50,7 @@ const formSchema = z.object({
 });
 
 export const ScraperForm = () => {
-  const [downloadLink, setDownloadLink] = useState("");
+  const { addDownloadUrl } = useDownloadStore();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -72,10 +73,10 @@ export const ScraperForm = () => {
   const mutation = useMutation(postScraperInfo, {
     onSuccess: async (data) => {
       const res = await data.json();
-      const downloadLink = `${import.meta.env.VITE_BACKEND_API}/download/${
-        res.file
-      }`;
-      setDownloadLink(downloadLink);
+      // const downloadLink = `${import.meta.env.VITE_BACKEND_API}/download/${
+      //   res.file
+      // }`;
+      addDownloadUrl(res.file);
     },
   });
 
@@ -148,15 +149,6 @@ export const ScraperForm = () => {
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Button type="submit">Scrape</Button>
-          {downloadLink && (
-            <a
-              href={downloadLink}
-              className={buttonVariants({ variant: "secondary" })}
-              download
-            >
-              Download File
-            </a>
-          )}
         </div>
       </form>
     </Form>
