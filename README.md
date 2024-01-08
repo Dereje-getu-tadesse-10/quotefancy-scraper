@@ -42,9 +42,8 @@ The server runs on http://localhost:5173
 
 - [x] Download scraped data
 - [x] Delete scraped file
-- [x] Scrape multiple __urls__
+- [x] Scrape multiple **urls**
 - [x] Choose file name and output file extension (e.g., `json`, `txt`, `csv`)
-
 
 https://github.com/Dereje-getu-tadesse-10/quotefancy-scraper/assets/95926729/8f0df1ba-c3db-489c-8a1f-9cb0c040ecee
 
