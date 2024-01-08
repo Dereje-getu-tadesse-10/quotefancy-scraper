@@ -77,7 +77,7 @@ const ItemWrapper = ({
     unknown
   >;
 }) => (
-  <ul className="space-y-4">
+  <ul className="space-y-2">
     {downloadUrls.map((file: string) => (
       <Item
         file={file}
@@ -95,11 +95,11 @@ const Item = ({ file, onClick }: { file: string; onClick: () => void }) => (
       <File className="text-card-foreground" size={20} />
       {truncateString(file, 20)}
     </p>
-    <div className="flex  gap-2">
+    <div className="flex">
       <Tooltip>
         <TooltipTrigger>
           <a
-            className={buttonVariants({ variant: "outline", size: "sm" })}
+            className={buttonVariants({ variant: "ghost", size: "sm" })}
             href={`${import.meta.env.VITE_BACKEND_API}/download/${file}`}
             download
           >
@@ -112,8 +112,8 @@ const Item = ({ file, onClick }: { file: string; onClick: () => void }) => (
       </Tooltip>
       <Tooltip>
         <TooltipTrigger>
-          <Button variant={"destructive"} size={"sm"} onClick={onClick}>
-            <Trash2 size={16} />
+          <Button variant={"ghost"} size={"sm"} onClick={onClick}>
+            <Trash2 className="text-destructive" size={16} />
           </Button>
         </TooltipTrigger>
         <TooltipContent>
