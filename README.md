@@ -1,5 +1,7 @@
 # Quotefancy Scraper
 
+[Live url](https://quotefancy-scraper.vercel.app/)
+
 ## Features
 
 - [x] Download scraped data with images (Note: Images are available only in JSON and CSV formats).
