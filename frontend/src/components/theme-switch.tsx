@@ -8,16 +8,14 @@ export const ThemeSwitch = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div>
-      <Button
-        variant={"ghost"}
-        size={"icon"}
-        onClick={() => {
-          setTheme(theme === "light" ? "dark" : "light");
-        }}
-      >
-        {theme === "light" ? <Sun size={16} /> : <Moon size={16} />}
-      </Button>
-    </div>
+    <Button
+      variant={"ghost"}
+      size={"icon"}
+      onClick={() => {
+        setTheme(theme === "light" ? "dark" : "light");
+      }}
+    >
+      {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
+    </Button>
   );
 };
