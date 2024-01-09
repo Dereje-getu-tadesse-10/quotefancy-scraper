@@ -77,7 +77,7 @@ https://quotefancy.com/taylor-swift-quotes/page/2,
 https://quotefancy.com/taylor-swift-quotes/page/3
 `}
                         {...field}
-                        className="resize-none"
+                        className="resize-none text-base"
                       />
                     </FormControl>
                     <FormDescription>
@@ -108,6 +108,7 @@ https://quotefancy.com/taylor-swift-quotes/page/3
                         placeholder="https://quotefancy.com/taylor-swift-quotes"
                         {...field}
                         type="url"
+                        className="text-base"
                       />
                     </FormControl>
                     <FormDescription>Quotefancy url </FormDescription>
@@ -124,7 +125,11 @@ https://quotefancy.com/taylor-swift-quotes/page/3
                 <FormItem>
                   <FormLabel>File name</FormLabel>
                   <FormControl>
-                    <Input placeholder="taylor-swift" {...field} />
+                    <Input
+                      placeholder="taylor-swift-quotes"
+                      className="text-base"
+                      {...field}
+                    />
                   </FormControl>
                   <FormDescription>
                     This is the output file name by default, is{" "}
