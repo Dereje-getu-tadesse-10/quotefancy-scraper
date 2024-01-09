@@ -1,5 +1,5 @@
 import { FileDown, Trash2, File } from "lucide-react";
-import { useMutation, UseMutationResult } from "react-query";
+import { UseMutateFunction, useMutation } from "react-query";
 import { z } from "zod";
 
 import { truncateString } from "@/lib/truncate";
@@ -37,7 +37,7 @@ export const DownloadUrls = () => {
     return res;
   };
 
-  const mutation = useMutation(deleteQuery, {
+  const { mutate, isLoading } = useMutation(deleteQuery, {
     onSuccess: async (data, variables) => {
       const res = await data.json();
       if (res.status === true) {
@@ -56,7 +56,11 @@ export const DownloadUrls = () => {
         {downloadUrls.length === 0 ? (
           <EmptyCard />
         ) : (
-          <ItemWrapper downloadUrls={downloadUrls} mutation={mutation} />
+          <ItemWrapper
+            downloadUrls={downloadUrls}
+            mutate={mutate}
+            isLoading={isLoading}
+          />
         )}
       </CardContent>
     </Card>
@@ -65,10 +69,11 @@ export const DownloadUrls = () => {
 
 const ItemWrapper = ({
   downloadUrls,
-  mutation,
+  mutate,
+  isLoading,
 }: {
   downloadUrls: string[];
-  mutation: UseMutationResult<
+  mutate: UseMutateFunction<
     Response,
     unknown,
     {
@@ -76,20 +81,30 @@ const ItemWrapper = ({
     },
     unknown
   >;
+  isLoading: boolean;
 }) => (
   <ul className="space-y-2">
     {downloadUrls.map((file: string) => (
       <Item
+        isLoading={isLoading}
         file={file}
         onClick={() => {
-          mutation.mutate({ file });
+          mutate({ file });
         }}
       />
     ))}
   </ul>
 );
 
-const Item = ({ file, onClick }: { file: string; onClick: () => void }) => (
+const Item = ({
+  file,
+  onClick,
+  isLoading,
+}: {
+  file: string;
+  onClick: () => void;
+  isLoading: boolean;
+}) => (
   <li className="flex items-center justify-between gap-4 flex-wrap rounded-lg border p-3 md:flex-row">
     <p className="flex items-center gap-1 text-card-foreground">
       <File className="text-card-foreground" size={20} />
@@ -103,7 +118,11 @@ const Item = ({ file, onClick }: { file: string; onClick: () => void }) => (
             href={`${import.meta.env.VITE_BACKEND_API}/download/${file}`}
             download
           >
-            <FileDown className="text-card-foreground" size={16} />
+            {isLoading ? (
+              <p>...</p>
+            ) : (
+              <FileDown className="text-card-foreground" size={16} />
+            )}
           </a>
         </TooltipTrigger>
         <TooltipContent>
