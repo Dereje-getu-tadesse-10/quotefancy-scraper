@@ -41,10 +41,10 @@ export const ScraperForm = () => {
     },
   });
 
-  const mutation = usePostScraperInfo(addDownloadUrl);
+  const { mutate, isLoading } = usePostScraperInfo(addDownloadUrl);
 
   const onSubmit: SubmitHandler<FormSchema> = (values) => {
-    mutation.mutate(values);
+    mutate(values);
   };
 
   return (
@@ -165,7 +165,9 @@ https://quotefancy.com/taylor-swift-quotes/page/3
                 </FormItem>
               )}
             />
-            <Button type="submit">Scrape</Button>
+            <Button disabled={isLoading} type="submit">
+              {isLoading ? "Scraping..." : "Scrape"}
+            </Button>
           </form>
         </Form>
       </CardContent>
